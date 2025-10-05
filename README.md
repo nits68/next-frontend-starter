@@ -247,9 +247,15 @@ Backend API hívásokhoz, egyszerűbben használható, mint a beépített fetch(
 npm install axios
 ```
 
-## 4. A layout.tsx egyszerűsítése
+## 4. A react-hot-toast telepítése, layout.tsx egyszerűsítése
+Felugró toast üznetekhez https://react-hot-toast.com/docs
+```
+npm install react-hot-toast
+```
+A main layout.tsx bővítése és egyszerűsítése:
 ```
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -264,10 +270,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
+        {children}
+      </body>
     </html>
   );
 }
+
 ```
 
 ## 5. A page.tsx egyszerűsítése
