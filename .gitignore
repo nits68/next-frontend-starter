@@ -40,5 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# data folder for exam sources
+# data and backend folder for exam sources
 /data
+/backend
