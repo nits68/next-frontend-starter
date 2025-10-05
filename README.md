@@ -137,8 +137,8 @@ npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plug
     "tabWidth": 2,
     "printWidth": 100,
     "plugins": [
-        "prettier-plugin-tailwindcss",
-        "@trivago/prettier-plugin-sort-imports"
+        "@trivago/prettier-plugin-sort-imports",
+        "prettier-plugin-tailwindcss"
     ],
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
@@ -205,6 +205,22 @@ const eslintConfig = [
 export default eslintConfig;
 ```
 [További opciók - GitHub link](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
+
+### 1.5 Next.js konfigurálása: next.config.ts
+Kép optimalizáció kikapcsolása, így bárhonnan tölthetünk le képeket (vagy meg kell adni a forrás URL-t):
+
+```
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  images: {
+    unoptimized: true,
+  },
+};
+
+export default nextConfig;
+```
 
 
 ## 2. daisyUI telepítése
