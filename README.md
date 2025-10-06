@@ -20,7 +20,7 @@ Majd interaktív lépések
 > Would you like to customize the import alias (`@/*` by default)? **No** / Yes<br>
 > What import alias would you like configured? @/\*<br>
 
-### 1.2 Configurációs állományok létrehozása, vagy másolása a .vscode mappába
+### 1.2 Konfigurációs állományok létrehozása, vagy másolása a .vscode mappába
 
 .vscode/extensions.json (majd a felajánlott VS Code bővítmények telepítése)
 
@@ -121,7 +121,7 @@ Majd interaktív lépések
 }
 ```
 
-### 1.3 Prettier és Eslint kiegészítők telepítése, beállítása, elemek (osztályok, property-k, importok) sorba rendezése
+### 1.3 Prettier és ESLint kiegészítők telepítése, beállítása, elemek (osztályok, property-k, importok) sorba rendezése
 ```
 npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plugin-react @trivago/prettier-plugin-sort-imports
 ```
@@ -162,7 +162,7 @@ Prettier scriptek hozzáadása a **package.json**-ba:
 }
 ```
 
-### 1.4 Eslint-FlatCompat konfiguráció felülírása
+### 1.4 ESLint-FlatCompat konfiguráció felülírása
 
 eslint.config.mjs
 
@@ -248,7 +248,7 @@ npm install axios
 ```
 
 ## 4. A react-hot-toast telepítése, layout.tsx egyszerűsítése
-Felugró toast üznetekhez https://react-hot-toast.com/docs
+Felugró toast üzenetekhez https://react-hot-toast.com/docs
 ```
 npm install react-hot-toast
 ```
@@ -330,7 +330,7 @@ A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sor
 12. Transforms:
 > scale-95, rotate-180, translate-x-2, transform-gpu, ...
 
-13. Interactivity / Behavior:
+13. Interactivity / Behaviour:
 > cursor-pointer, select-none, resize, scroll-smooth, ...
 
 14. Accessibility:
