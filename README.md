@@ -97,24 +97,39 @@ Majd interaktív lépések
 
 ```
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "dev",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+  "version": "0.2.0",
+  "configurations": [
+     {
+      "name": "Debug client-side in Edge",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3000",
     },
     {
-      "type": "npm",
-      "script": "test",
-      "group": {
-        "kind": "test",
-        "isDefault": true
+      "name": "Debug client-side in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+    },
+    {
+      "name": "Debug server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Debug full stack",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
+      "serverReadyAction": {
+        "action": "debugWithEdge",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
       }
     }
   ]
