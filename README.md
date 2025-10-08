@@ -307,13 +307,12 @@ export default function Home() {
 ```
 
 ## 6. Install React Developer Tools 
-```
-[MS Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload)
-```
 
-```
+[MS Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload)
+
+
 [Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
-```
+
 
 ## Tailwind CSS osztályok sorrendje
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
