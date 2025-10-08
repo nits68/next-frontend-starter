@@ -307,65 +307,97 @@ export default function Home() {
 ```
 
 ## 6. Install React Developer Tools 
-Edge:
 ```
-https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload
+[MS Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload)
 ```
-Chrome:
+
 ```
-https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+[Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 ```
+
 ## Tailwind CSS osztályok sorrendje
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 
 1. Layout: Ezek határozzák meg az elem megjelenésének alapját:
-> container, box-decoration-slice, box-border, block, inline-block, flex, grid, table, contents, hidden, ...
+```
+container, box-decoration-slice, box-border, block, inline-block, flex, grid, table, contents, hidden, ...
+```
 
 2. Box model / Display properties:
-> float, clear, isolation, object-contain, overflow-auto, overscroll-none, ...
+```
+float, clear, isolation, object-contain, overflow-auto, overscroll-none, ...
+```
 
 3. Positioning:
-> static, fixed, absolute, relative, sticky, inset-0, top-0, right-0, bottom-0, left-0, z-10, ...
+```
+static, fixed, absolute, relative, sticky, inset-0, top-0, right-0, bottom-0, left-0, z-10, ...
+```
 
 4. Flexbox & Grid:
-> flex-row, flex-col, flex-wrap, place-content-center, items-center, justify-between, gap-4, grid-cols-2, ...
+```
+flex-row, flex-col, flex-wrap, place-content-center, items-center, justify-between, gap-4, grid-cols-2, ...
+```
 
 5. Box sizing & Spacing:
-> w-*, min-w-*, max-w-*, h-*, p-*, m-*, space-x-*, space-y-*, ...
+```
+w-*, min-w-*, max-w-*, h-*, p-*, m-*, space-x-*, space-y-*, ...
+```
 
 6. Typography:
-> font-sans, text-sm, font-bold, leading-tight, tracking-wide, text-gray-700, italic, underline, ...
+```
+font-sans, text-sm, font-bold, leading-tight, tracking-wide, text-gray-700, italic, underline, ...
+```
 
 7. Backgrounds:
-> bg-transparent, bg-gray-100, bg-gradient-to-r, from-blue-500, via-green-400, to-yellow-300, ...
+```
+bg-transparent, bg-gray-100, bg-gradient-to-r, from-blue-500, via-green-400, to-yellow-300, ...
+```
 
 8. Borders:
-> border, border-0, border-2, border-gray-300, rounded-lg, rounded-full, ...
+```
+border, border-0, border-2, border-gray-300, rounded-lg, rounded-full, ...
+```
 
 9. Effects:
-> shadow, shadow-md, opacity-50, mix-blend-multiply, ...
+```
+shadow, shadow-md, opacity-50, mix-blend-multiply, ...
+```
 
 10. Filters:
-> blur, brightness-90, contrast-125, grayscale, sepia, ...
+```
+blur, brightness-90, contrast-125, grayscale, sepia, ...
+```
 
 11. Transitions & Animations:
-> transition, duration-300, ease-in-out, animate-bounce, ...
+```
+transition, duration-300, ease-in-out, animate-bounce, ...
+```
 
 12. Transforms:
-> scale-95, rotate-180, translate-x-2, transform-gpu, ...
+```
+scale-95, rotate-180, translate-x-2, transform-gpu, ...
+```
 
 13. Interactivity / Behaviour:
-> cursor-pointer, select-none, resize, scroll-smooth, ...
+```
+cursor-pointer, select-none, resize, scroll-smooth, ...
+```
 
 14. Accessibility:
-> sr-only, not-sr-only, ...
+```
+sr-only, not-sr-only, ...
+```
 
 15. Tables:
-> table-auto, table-fixed, border-collapse, border-separate, ...
+```
+table-auto, table-fixed, border-collapse, border-separate, ...
+```
 
 16. Transitions (state variants)
 Állapot prefixek külön kezelve, pl.:
-> hover:, focus:, active:, disabled:, group-hover:, peer-focus:, ...
+```
+hover:, focus:, active:, disabled:, group-hover:, peer-focus:, ...
+```
 
 17. Responsive variants:
 A médiaquery prefixek (sm:, md:, lg:, xl:, 2xl:) mindig a végén maradnak, de belül ugyanazt a sorrendet követik, mint az alap classok.
