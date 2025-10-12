@@ -314,6 +314,19 @@ export default function Home() {
 [Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
 
+## 7. Linkek, dokumentációk
+
+[React.js](https://react.dev/reference/react)
+[Next.js](https://nextjs.org/docs)
+[Tailwind CSS](https://tailwindcss.com/docs)
+[daisyUI](https://daisyui.com/components/)
+[Typescript](https://www.typescriptlang.org/)
+[DevDocs](https://devdocs.io/)
+[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+[GetEmoji](https://getemoji.com/)
+
+
+
 ## Tailwind CSS osztályok sorrendje
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 
