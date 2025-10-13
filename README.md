@@ -45,8 +45,26 @@ Majd interaktív lépések
 {
   "version": "0.2.0",
   "configurations": [
+     {
+      "name": "Debug client-side in Edge",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3000",
+    },
     {
-      "name": "Next.js: debug full stack",
+      "name": "Debug client-side in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+    },
+    {
+      "name": "Debug server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Debug full stack",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
@@ -97,39 +115,24 @@ Majd interaktív lépések
 
 ```
 {
-  "version": "0.2.0",
-  "configurations": [
-     {
-      "name": "Debug client-side in Edge",
-      "type": "msedge",
-      "request": "launch",
-      "url": "http://localhost:3000",
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     },
     {
-      "name": "Debug client-side in Chrome",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:3000",
-    },
-    {
-      "name": "Debug server-side",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "npm run dev"
-    },
-    {
-      "name": "Debug full stack",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
-      "runtimeArgs": ["--inspect"],
-      "skipFiles": ["<node_internals>/**"],
-      "serverReadyAction": {
-        "action": "debugWithEdge",
-        "killOnServerStop": true,
-        "pattern": "- Local:.+(https?://.+)",
-        "uriFormat": "%s",
-        "webRoot": "${workspaceFolder}"
+      "type": "npm",
+      "script": "test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
       }
     }
   ]
@@ -256,7 +259,7 @@ npm i -D daisyui@latest
 [daisyUI dokumentáció](https://daisyui.com/docs/intro/)
 
 
-## 3. Axios telepítése
+## 3. Axios telepítése (opcionális, fetch API használható helyette)
 Backend API hívásokhoz, egyszerűbben használható, mint a beépített fetch()
 ```
 npm install axios
@@ -316,15 +319,16 @@ export default function Home() {
 
 ## 7. Linkek, dokumentációk
 
-[React.js](https://react.dev/reference/react)
-[Next.js](https://nextjs.org/docs)
-[Tailwind CSS](https://tailwindcss.com/docs)
-[daisyUI](https://daisyui.com/components/)
-[Typescript](https://www.typescriptlang.org/)
-[DevDocs](https://devdocs.io/)
-[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-[GetEmoji](https://getemoji.com/)
-
+- [React.js](https://react.dev/reference/react)
+- [Next.js](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [daisyUI](https://daisyui.com/components/)
+- [Typescript](https://www.typescriptlang.org/)
+- [DevDocs](https://devdocs.io/)
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [Axios with TypeScript](https://bobbyhadz.com/blog/typescript-http-request-axios)
+- [Fetch API with Typescript](https://bobbyhadz.com/blog/typescript-http-request)
+- [GetEmoji](https://getemoji.com/)
 
 
 ## Tailwind CSS osztályok sorrendje
