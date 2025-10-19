@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
 type GlobalState = {
   loggedUser: string | null;
@@ -11,19 +12,24 @@ type GlobalState = {
 };
 
 export const useGlobalStore = create<GlobalState>()(
-  // persist middleware hozzáadása az állapot perzisztenciájához (frissítés után is megmarad)
   persist(
-    (set) => ({
+    immer((set) => ({
       loggedUser: null,
       isLightTheme: true,
       id: null,
-      setId: (newId) => set({ id: newId }),
-      setLoggedUser: (user) => set({ loggedUser: user }),
+      setId: (newId) =>
+        set((state) => {
+          state.id = newId;
+        }),
+      setLoggedUser: (user) =>
+        set((state) => {
+          state.loggedUser = user;
+        }),
       toggleTheme: () =>
-        set((state) => ({
-          isLightTheme: !state.isLightTheme,
-        })),
-    }),
-    { name: "global-store" }, // kulcsok a localStorage-ben tárolódnak ezzel a névvel
+        set((state) => {
+          state.isLightTheme = !state.isLightTheme;
+        }),
+    })),
+    { name: "global-store" }, // kulcs a localStorage-ben
   ),
 );
