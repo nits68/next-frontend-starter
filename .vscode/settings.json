@@ -19,5 +19,8 @@
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative"
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "vscode-edge-devtools.defaultUrl": "http://localhost:8080",
+  "vscode-edge-devtools.webhint": false,
+  "vscode-edge-devtools.webhintInstallNotification": true
 }
