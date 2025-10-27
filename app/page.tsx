@@ -2,9 +2,16 @@
 
 import { clsx } from "clsx";
 import { useGlobalStore } from "@/store/globalStore";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const { loggedUser, setLoggedUser } = useGlobalStore();
+
+  
+  useEffect(() => {
+    toast.success("Render page!");
+  });
 
   return (
     <div>
