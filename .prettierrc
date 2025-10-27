@@ -13,6 +13,9 @@
         "@/(.*)$",
         "^[./]"
     ],
+    "tailwindFunctions": [
+        "clsx"
+    ],
     "importOrderSeparation": false,
     "importOrderSortSpecifiers": true,
     "tailwindStylesheet": "./app/globals.css"

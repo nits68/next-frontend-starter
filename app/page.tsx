@@ -1,5 +1,6 @@
 "use client";
 
+import { clsx } from "clsx";
 import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {
@@ -7,7 +8,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">
+      <h1 className={clsx("text-3xl font-bold", { "text-red-500": !loggedUser })}>
         Hello, {loggedUser || ""}!
       </h1>
       <input
@@ -18,4 +19,4 @@ export default function HomePage() {
       />
     </div>
   );
-} 
+}
