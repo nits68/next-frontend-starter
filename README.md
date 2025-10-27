@@ -12,7 +12,8 @@ Majd interaktív lépések
 
 > What is your project named? projekt_neve<br>
 > Would you like to use TypeScript? No / **Yes**<br>
-> Would you like to use ESLint? No / **Yes**<br>
+> Which linter would you like to use? **ESLint**<br>
+> Would you like to use React Compiler? **No** / Yes<br>
 > Would you like to use Tailwind CSS? No / **Yes**<br>
 > Would you like your code inside a `src/` directory? **No** / Yes<br>
 > Would you like to use App Router? (recommended) No / **Yes**<br>
@@ -33,9 +34,12 @@ Majd interaktív lépések
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",
     "nextpress.nextpress-snippets",
-    "abdulowhab.json-to-ts-type"
+    "abdulowhab.json-to-ts-type",
+    "tomoki1207.pdf",
+    "humao.rest-client",
   ]
 }
+
 
 ```
 
@@ -109,6 +113,7 @@ Majd interaktív lépések
   "javascript.preferences.importModuleSpecifier": "non-relative"
 }
 
+
 ```
 
 .vscode/tasks.json
@@ -148,7 +153,6 @@ npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plug
 **.prettierrc** állomány létrehozása(másolása) a projekt főkönyvtárába
 
 ```
-
 {
     "singleQuote": false,
     "semi": true,
@@ -163,6 +167,9 @@ npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plug
         "<THIRD_PARTY_MODULES>",
         "@/(.*)$",
         "^[./]"
+    ],
+    "tailwindFunctions": [
+        "clsx"
     ],
     "importOrderSeparation": false,
     "importOrderSortSpecifiers": true,
@@ -186,22 +193,16 @@ Prettier scriptek hozzáadása a **package.json**-ba:
 eslint.config.mjs
 
 ```
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-import prettier from "eslint-config-prettier";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+import prettier from "eslint-config-prettier/flat";
+import { defineConfig, globalIgnores } from "eslint/config";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettier,
   {
-    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"],
     rules: {
       "react/jsx-sort-props": [
         2,
@@ -218,8 +219,15 @@ const eslintConfig = [
       ],
     },
   },
-  prettier, // Make sure this is always the last element in the array.
-];
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
 
 export default eslintConfig;
 ```
@@ -235,12 +243,18 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  
+  // Disable React Strict Mode
+  // reactStrictMode: false,
+
+  // Disable image optimization
   images: {
     unoptimized: true,
   },
 };
 
 export default nextConfig;
+
 ```
 
 ## 2. daisyUI telepítése
@@ -309,13 +323,36 @@ export default function RootLayout({
 ## 5. A page.tsx egyszerűsítése
 
 ```
-export default function Home() {
+"use client";
+
+import { clsx } from "clsx";
+import { useGlobalStore } from "@/store/globalStore";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+
+export default function HomePage() {
+  const { loggedUser, setLoggedUser } = useGlobalStore();
+
+  
+  useEffect(() => {
+    toast.success("Render page!");
+  });
+
   return (
     <div>
-      <h1 className="text-3xl font-bold">Hello, world!</h1>
+      <h1 className={clsx("text-3xl font-bold", { "text-red-500": !loggedUser })}>
+        Hello, {loggedUser || ""}!
+      </h1>
+      <input
+        className="input input-primary"
+        type="text"
+        value={loggedUser || ""}
+        onChange={(e) => setLoggedUser(e.target.value)}
+      />
     </div>
   );
 }
+
 ```
 
 ## 6. Zustand - Global state management tool
@@ -372,13 +409,26 @@ const { loggedUser } = useGlobalStore();
 return <div>loggedUser</div>
 ```
 
-## 7. Install React Developer Tools
+## 7. Install clsx function
+```
+npm i clsx
+```
+Add example:
+```
+import { clsx } from "clsx";
+...
+<h1 className={clsx("text-3xl font-bold", { "text-red-500": !loggedUser })}>
+  Hello, {loggedUser || ""}!
+</h1>
+```
+
+## 8. Install React Developer Tools
 
 [MS Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload)
 
 [Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
-## 8. Linkek, dokumentációk
+## 9. Linkek, dokumentációk
 
 - [React.js](https://react.dev/reference/react)
 - [Next.js](https://nextjs.org/docs)
@@ -393,7 +443,7 @@ return <div>loggedUser</div>
 - [GetEmoji](https://getemoji.com/)
 
 
-## Tailwind CSS osztályok sorrendje
+## 1. Tailwind CSS osztályok funkcionális sorrendje
 
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 
