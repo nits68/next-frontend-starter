@@ -19,5 +19,10 @@
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative"
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx" : "${dirname} - Page",
+    "**/app/**/layout.tsx" : "${dirname} - Layout",
+    "**/components/**/index.tsx" : "${dirname} - Component",
+  }
 }
