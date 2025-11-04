@@ -1,2 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@custom-variant dark (&:where(.dark, .dark *));
+// change teheme: document.documentElement.classList.toggle("dark", dark);
+
+html {
+  scroll-behavior: smooth;
+}
