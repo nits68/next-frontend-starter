@@ -1,14 +1,13 @@
 "use client";
 
 import { clsx } from "clsx";
-import { useGlobalStore } from "@/store/globalStore";
-import toast from "react-hot-toast";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {
   const { loggedUser, setLoggedUser } = useGlobalStore();
 
-  
   useEffect(() => {
     toast.success("Render page!");
   });
