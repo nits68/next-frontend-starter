@@ -2,16 +2,16 @@ import { create } from "zustand";
 
 type GlobalStore = {
   loggedUser: string | null;
-  isLightTheme: boolean;
+  lightTheme: boolean;
   id: number | null;
   setId: (newId: number | null) => void;
   setLoggedUser: (newLoggedUser: string | null) => void;
-  toggleTheme: () => void;
+  setLightTheme: (newLightTheme: boolean) => void;
 };
 
 export const useGlobalStore = create<GlobalStore>()((set) => ({
   loggedUser: null,
-  isLightTheme: true,
+  lightTheme: true,
   id: null,
   // A set függvény itt egy új állapotobjektumot ad vissza
   setId: (newId) =>
@@ -25,9 +25,9 @@ export const useGlobalStore = create<GlobalStore>()((set) => ({
       ...state,
       loggedUser: newLoggedUser,
     })),
-  toggleTheme: () =>
+  setLightTheme: (newLightTheme) =>
     set((state) => ({
       ...state,
-      isLightTheme: !state.isLightTheme,
+      lightTheme: newLightTheme,
     })),
 }));
