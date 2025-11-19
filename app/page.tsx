@@ -14,12 +14,12 @@ export default function HomePage() {
   });
 
   function handleThemeToggle() {
-    document.documentElement.classList.toggle("dark", lightTheme);
     setLightTheme(!lightTheme);
+    document.documentElement.classList.toggle("dark", lightTheme);
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-200 dark:bg-gray-800">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
       <h1 className={clsx("text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
         Hello, {loggedUser || ""}!
       </h1>
@@ -29,7 +29,7 @@ export default function HomePage() {
         value={loggedUser || ""}
         onChange={(e) => setLoggedUser(e.target.value)}
       />
-      <button className="btn btn-primary mt-4" onClick={handleThemeToggle}>
+      <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
         Toggle Theme
       </button>
     </div>
