@@ -1,4 +1,3 @@
-// prettier.config.ts
 import { type Config } from "prettier";
 // Trükk: A pluginok útvonalának feloldásához a "module" csomag kell
 import { createRequire } from "module";

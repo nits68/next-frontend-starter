@@ -110,9 +110,13 @@ Majd interaktív lépések
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative"
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx" : "${dirname} - Page",
+    "**/app/**/layout.tsx" : "${dirname} - Layout",
+    "**/components/**/index.tsx" : "${dirname} - Component",
+  }
 }
-
 
 ```
 
@@ -150,31 +154,38 @@ Majd interaktív lépések
 npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plugin-react @trivago/prettier-plugin-sort-imports
 ```
 
-**.prettierrc** állomány létrehozása(másolása) a projekt főkönyvtárába
+**prettier.config.ts** állomány létrehozása(másolása) a projekt főkönyvtárába
 
 ```
-{
-    "singleQuote": false,
-    "semi": true,
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "printWidth": 100,
-    "plugins": [
-        "@trivago/prettier-plugin-sort-imports",
-        "prettier-plugin-tailwindcss"
-    ],
-    "importOrder": [
-        "<THIRD_PARTY_MODULES>",
-        "@/(.*)$",
-        "^[./]"
-    ],
-    "tailwindFunctions": [
-        "clsx"
-    ],
-    "importOrderSeparation": false,
-    "importOrderSortSpecifiers": true,
-    "tailwindStylesheet": "./app/globals.css"
-}
+import { type Config } from "prettier";
+// Trükk: A pluginok útvonalának feloldásához a "module" csomag kell
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+
+const config: Config = {
+  singleQuote: false,
+  semi: true,
+  trailingComma: "all",
+  tabWidth: 2,
+  printWidth: 100,
+  plugins: [
+    // Itt is kötelező a feloldás, különben a VS Code nem találja meg őket
+    require.resolve("@trivago/prettier-plugin-sort-imports"),
+    require.resolve("prettier-plugin-tailwindcss"),
+  ],
+  importOrder: [
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "^[./]",
+  ],
+  importOrderSeparation: false,
+  importOrderSortSpecifiers: true,
+  tailwindFunctions: ["clsx"],
+  tailwindStylesheet: "./app/globals.css",
+};
+
+export default config;
 ```
 
 Prettier scriptek hozzáadása a **package.json**-ba:
@@ -243,7 +254,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  
+
   // Disable React Strict Mode
   // reactStrictMode: false,
 
@@ -320,27 +331,32 @@ export default function RootLayout({
 
 ```
 
-## 5. A page.tsx egyszerűsítése
+## 5. A page.tsx átírása, új lehetőségek bemutatása
 
 ```
 "use client";
 
 import { clsx } from "clsx";
-import { useGlobalStore } from "@/store/globalStore";
-import toast from "react-hot-toast";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {
   const { loggedUser, setLoggedUser } = useGlobalStore();
+  const { lightTheme, setLightTheme } = useGlobalStore();
 
-  
   useEffect(() => {
     toast.success("Render page!");
   });
 
+  function handleThemeToggle() {
+    setLightTheme(!lightTheme);
+    document.documentElement.classList.toggle("dark", lightTheme);
+  }
+
   return (
-    <div>
-      <h1 className={clsx("text-3xl font-bold", { "text-red-500": !loggedUser })}>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
+      <h1 className={clsx("text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
         Hello, {loggedUser || ""}!
       </h1>
       <input
@@ -349,77 +365,12 @@ export default function HomePage() {
         value={loggedUser || ""}
         onChange={(e) => setLoggedUser(e.target.value)}
       />
+      <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
+        Toggle Theme
+      </button>
     </div>
   );
 }
-
-```
-
-## 6. Zustand - Global state management tool
-
-### 6.1 Install zustand
-```
-npm i zustand
-```
-
-### 6.2 Create persist Global Store: /store/globalStore.ts
-```
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
-
-type GlobalState = {
-  loggedUser: string | null;
-  isLightTheme: boolean;
-  id: number | null;
-  setId: (newId: number | null) => void;
-  setLoggedUser: (user: string | null) => void;
-  toggleTheme: () => void;
-};
-
-export const useGlobalStore = create<GlobalState>()(
-  persist(
-    immer((set) => ({
-      loggedUser: null,
-      isLightTheme: true,
-      id: null,
-      setId: (newId) =>
-        set((state) => {
-          state.id = newId;
-        }),
-      setLoggedUser: (user) =>
-        set((state) => {
-          state.loggedUser = user;
-        }),
-      toggleTheme: () =>
-        set((state) => {
-          state.isLightTheme = !state.isLightTheme;
-        }),
-    })),
-    { name: "global-store" }, // kulcs a localStorage-ben
-  ),
-);
-```
-### 6.3 Use Zustand global store
-```
-import { useGlobalStore } from "@/store/globalStore";
-...
-const { loggedUser } = useGlobalStore();
-...
-return <div>loggedUser</div>
-```
-
-## 7. Install clsx function
-```
-npm i clsx
-```
-Add example:
-```
-import { clsx } from "clsx";
-...
-<h1 className={clsx("text-3xl font-bold", { "text-red-500": !loggedUser })}>
-  Hello, {loggedUser || ""}!
-</h1>
 ```
 
 ## 8. Install React Developer Tools
@@ -428,7 +379,7 @@ import { clsx } from "clsx";
 
 [Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
-## 9. Linkek, dokumentációk
+## 9. Linkek, dokumentációk (white list)
 
 - [React.js](https://react.dev/reference/react)
 - [Next.js](https://nextjs.org/docs)
@@ -442,8 +393,7 @@ import { clsx } from "clsx";
 - [Fetch API with Typescript](https://bobbyhadz.com/blog/typescript-http-request)
 - [GetEmoji](https://getemoji.com/)
 
-
-## 1. Tailwind CSS osztályok funkcionális sorrendje
+## 10. Tailwind CSS osztályok funkcionális sorrendje
 
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 
