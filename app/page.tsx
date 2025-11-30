@@ -20,7 +20,7 @@ export default function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
-      <h1 className={clsx("text-3xl font-bold mb-6", lightTheme ? "text-black" : "text-white")}>
+      <h1 className={clsx("mb-6 text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
         Hello, {loggedUser || ""}! 😎
       </h1>
       <input

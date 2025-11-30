@@ -10,7 +10,7 @@ const eslintConfig = defineConfig([
   {
     rules: {
       "react/jsx-sort-props": [
-        2,
+        1,
         {
           callbacksLast: true,
           shorthandFirst: false,
