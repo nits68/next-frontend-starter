@@ -18,6 +18,7 @@
   "git.pruneOnFetch": true,
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "workbench.editor.customLabels.patterns": {
