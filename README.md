@@ -391,6 +391,7 @@ export default function HomePage() {
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [Axios with TypeScript](https://bobbyhadz.com/blog/typescript-http-request-axios)
 - [Fetch API with Typescript](https://bobbyhadz.com/blog/typescript-http-request)
+- [Lucide-react icons](https://lucide.dev/icons/)
 - [GetEmoji](https://getemoji.com/)
 
 ## 10. Tailwind CSS osztályok funkcionális sorrendje

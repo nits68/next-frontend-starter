@@ -1,6 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
+import { SunMoon } from "lucide-react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useGlobalStore } from "@/store/globalStore";
@@ -30,6 +31,7 @@ export default function HomePage() {
         onChange={(e) => setLoggedUser(e.target.value)}
       />
       <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
+        <SunMoon className="mr-2" size={24} />
         Toggle Theme
       </button>
     </div>
