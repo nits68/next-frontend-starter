@@ -7,12 +7,13 @@ import toast from "react-hot-toast";
 import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {
+  // Using Zustand global store for state management example
   const { loggedUser, setLoggedUser } = useGlobalStore();
   const { lightTheme, setLightTheme } = useGlobalStore();
 
   useEffect(() => {
     toast.success("Render page!");
-  });
+  }); // no dependency array to demonstrate re-render toast
 
   function handleThemeToggle() {
     setLightTheme(!lightTheme);
