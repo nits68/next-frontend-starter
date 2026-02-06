@@ -6,16 +6,16 @@
 
 ```
 npx create-next-app@latest
-
-Need to install the following packages:
-create-next-app@16.*.*
-Ok to proceed? (y) y
 ```
 
-Majd interaktív lépések
+Majd interaktív lépések:
 
-> What is your project named? projekt_neve<br>
-> Would you like to use the recommended Next.js defaults? » **No, customize settings**
+> Need to install the following packages:<br>
+> create-next-app@16.*.*<br>
+> Ok to proceed? (y) **y**<br>
+
+> What is your project named? **projekt_neve**<br>
+> Would you like to use the recommended Next.js defaults? » **No, customize settings**<br>
 > Would you like to use TypeScript? No / **Yes**<br>
 > Which linter would you like to use? **ESLint**<br>
 > Would you like to use React Compiler? **No** / Yes<br>
