@@ -1,6 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
+import dayjs from "dayjs";
 import { SunMoon } from "lucide-react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -12,7 +13,7 @@ export default function HomePage() {
   const { lightTheme, setLightTheme } = useGlobalStore();
 
   useEffect(() => {
-    toast.success("Render page!");
+    toast.success(`Render on: ${dayjs().format("YYYY.MM.DD HH:mm:ss")}`);
   }); // no dependency array to demonstrate re-render toast
 
   function handleThemeToggle() {
