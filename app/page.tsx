@@ -3,6 +3,7 @@
 import { clsx } from "clsx";
 import dayjs from "dayjs";
 import { SunMoon } from "lucide-react";
+import Image from "next/image";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useGlobalStore } from "@/store/globalStore";
@@ -24,7 +25,17 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
       <h1 className={clsx("mb-6 text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
-        Hello, {loggedUser || ""}! 😎
+        {"Hello, "}
+        {loggedUser || (
+          <Image
+            alt="next logo"
+            className="p-2 inline dark:bg-white dark:rounded-md"
+            height={0}
+            src="next.svg"
+            width={110}
+          />
+        )}
+        ! 😎
       </h1>
       <input
         className="input input-primary"
