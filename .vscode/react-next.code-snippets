@@ -1,0 +1,42 @@
+{
+  "Axios general error handling": {
+    "scope": "javascript,typescript",
+    "prefix": "íAxiosError",
+    "body": [
+      "if (error instanceof AxiosError) {",
+      "\ttoast(error.response?.data.message || error.message || \"Unknown Axios error!\");",
+      "} else {",
+      "\ttoast((error as Error).message || \"Unknown error!\");",
+      "}",
+    ],
+    "description": "Axios general error handling"
+  },
+  "useEffect - get API data on start": {
+    "scope": "javascript,typescript",
+    "prefix": "íuseEffectGet1",
+    "body": [
+        "useEffect(() => {",
+        "\tasync function getFromAPI() {",
+        "\t\tconst res = await axios.get<ResponseItem[]>(\"http://localhost:3000/api/route1\");",
+        "\t\tsetStateVariableArray(res.data);",
+        "\t}",
+        "\tgetFromAPI();",
+        "}, []);"
+    ],
+    "description": "useEffect - get API data on start"
+  },
+  "useEffect - get API data on state change": {
+    "scope": "javascript,typescript",
+    "prefix": "íuseEffectGet2",
+    "body": [
+        "useEffect(() => {",
+        "\tasync function getFromAPI() {",
+        "\t\tconst res = await axios.get<ResponseItem[]>(`http://localhost:3000/api/\\${stateVariable}/route2`);",
+        "\t\tsetStateVariableArray(res.data);",
+        "\t}",
+        "\tgetFromAPI();",
+        "}, [stateVariable]);",
+    ],
+    "description": "useEffect - get API data on state change"
+  },
+}
