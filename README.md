@@ -1,5 +1,9 @@
 # Next.js-frontend-starter
 
+A Next.js egy népszerű webfejlesztési (akár fullstack) keretrendszer, amely a React könyvtárra épül, és lehetővé teszi a szerveroldali renderelést, valamint statikus weboldalak generálását, ezáltal javítva a fejlesztési időt és a weboldalak teljesítményét.
+
+Ezt a technológiát a 2016-os megjelenése óta fejlesztők és vállalatok százezrei használják, többek között olyan cégek, mint a Vercel, a GitHub, a Netflix, a TikTok, a Twitch, a Hulu, a Nike, az Adidas, az IKEA, az Uber és a HBO Max.
+
 ## 1. Projekt létrehozása
 
 ### 1.1 CMD ablakból a szülő mappa kiválasztása után
@@ -11,7 +15,7 @@ npx create-next-app@latest
 Majd interaktív lépések:
 
 > Need to install the following packages:<br>
-> create-next-app@16.*.*<br>
+> create-next-app@16.x.x*<br>
 > Ok to proceed? (y) **y**<br>
 
 > What is your project named? **projekt_neve**<br>
