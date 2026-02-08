@@ -364,7 +364,15 @@ Dátumok és időpontok kezeléséhez https://day.js.org/
 npm install dayjs
 ```
 
-## 7. A page.tsx átírása, új lehetőségek bemutatása
+## 7. clsx - A tiny (239B) utility for constructing className strings conditionally.
+
+Hompage: https://github.com/lukeed/clsx#readme
+
+```
+npm i clsx
+```
+
+## 8. A page.tsx átírása, új lehetőségek bemutatása
 
 ```
 "use client";
@@ -410,13 +418,13 @@ export default function HomePage() {
 }
 ```
 
-## 8. Install React Developer Tools
+## 9. Install React Developer Tools
 
 [MS Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload)
 
 [Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
-## 9. Linkek, dokumentációk (white list)
+## 10. Linkek, dokumentációk (white list)
 
 - [React.js](https://react.dev/reference/react)
 - [Next.js](https://nextjs.org/docs)
@@ -431,8 +439,9 @@ export default function HomePage() {
 - [Fetch API with Typescript](https://bobbyhadz.com/blog/typescript-http-request)
 - [Lucide-react icons](https://lucide.dev/icons/)
 - [GetEmoji](https://getemoji.com/)
+- [clsx](https://github.com/lukeed/clsx#readme)
 
-## 10. Tailwind CSS osztályok funkcionális sorrendje
+## 11. Tailwind CSS osztályok funkcionális sorrendje
 
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 

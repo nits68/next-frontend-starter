@@ -11,6 +11,7 @@
     "source.fixAll.eslint": "always"
   },
   "eslint.validate": ["typescript", "react", "typescriptreact", "javascript", "javascriptreact"],
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
   "git.enableSmartCommit": true,
@@ -22,8 +23,8 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "workbench.editor.customLabels.patterns": {
-    "**/app/**/page.tsx" : "${dirname} - Page",
-    "**/app/**/layout.tsx" : "${dirname} - Layout",
-    "**/components/**/index.tsx" : "${dirname} - Component",
+    "**/app/**/page.tsx": "${dirname} - Page",
+    "**/app/**/layout.tsx": "${dirname} - Layout",
+    "**/components/**/index.tsx": "${dirname} - Component"
   }
 }
