@@ -1,26 +1,26 @@
 {
   "version": "0.2.0",
   "configurations": [
-     {
+    {
       "name": "Debug client-side in Edge",
       "type": "msedge",
       "request": "launch",
-      "url": "http://localhost:8080",
+      "url": "http://localhost:8080"
     },
     {
       "name": "Debug client-side in Chrome",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:8080",
+      "url": "http://localhost:8080"
     },
     {
-      "name": "Debug server-side",
+      "name": "Next.js: debug server-side",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run dev"
+      "command": "npm run dev -- --inspect"
     },
     {
-      "name": "Debug full stack",
+      "name": "Next.js: debug full stack",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
