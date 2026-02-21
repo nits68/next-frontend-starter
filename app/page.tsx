@@ -29,7 +29,7 @@ export default function HomePage() {
         {loggedUser || (
           <Image
             alt="next logo"
-            className="p-2 inline dark:bg-white dark:rounded-md"
+            className="inline p-2 dark:rounded-md dark:bg-white"
             height={0}
             src="next.svg"
             width={110}
