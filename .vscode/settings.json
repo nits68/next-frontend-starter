@@ -12,6 +12,8 @@
   },
   "eslint.validate": ["typescript", "react", "typescriptreact", "javascript", "javascriptreact"],
   "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
+  "prettier.enableDebugLogs": false,
+  "prettier.requireConfig": true,
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
   "git.enableSmartCommit": true,

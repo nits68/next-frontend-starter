@@ -39,6 +39,7 @@ export default function HomePage() {
       </h1>
       <input
         className="input input-primary"
+        id="nameInput"
         type="text"
         value={loggedUser || ""}
         onChange={(e) => setLoggedUser(e.target.value)}
