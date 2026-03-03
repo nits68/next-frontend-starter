@@ -1,33 +1,30 @@
 import { create } from "zustand";
 
-type GlobalStore = {
+// Define the shape of the global state
+type GlobalStateData = {
   loggedUser: string | null;
   lightTheme: boolean;
   id: number | null;
-  setId: (newId: number | null) => void;
-  setLoggedUser: (newLoggedUser: string | null) => void;
-  setLightTheme: (newLightTheme: boolean) => void;
+};
+
+type GlobalStore = {
+  gs: GlobalStateData;
+  set: <K extends keyof GlobalStateData>(key: K, value: GlobalStateData[K]) => void;
 };
 
 export const useGlobalStore = create<GlobalStore>()((set) => ({
-  loggedUser: null,
-  lightTheme: true,
-  id: null,
-  // A set függvény itt egy új állapotobjektumot ad vissza
-  setId: (newId) =>
+  // Initialize the global state:
+  gs: {
+    loggedUser: null,
+    lightTheme: true,
+    id: null,
+  },
+
+  set: (key, value) =>
     set((state) => ({
-      // A visszatérési érték egy új objektum, ami az előző state-ből és a módosításokból áll
-      ...state,
-      id: newId,
-    })),
-  setLoggedUser: (newLoggedUser) =>
-    set((state) => ({
-      ...state,
-      loggedUser: newLoggedUser,
-    })),
-  setLightTheme: (newLightTheme) =>
-    set((state) => ({
-      ...state,
-      lightTheme: newLightTheme,
+      gs: {
+        ...state.gs,
+        [key]: value,
+      },
     })),
 }));

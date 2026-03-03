@@ -10,23 +10,22 @@ import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {
   // Using Zustand global store for state management example
-  const { loggedUser, setLoggedUser } = useGlobalStore();
-  const { lightTheme, setLightTheme } = useGlobalStore();
+  const { gs, set } = useGlobalStore();
 
   useEffect(() => {
     toast.success(`Render on: ${dayjs().format("YYYY.MM.DD HH:mm:ss")}`);
   }); // no dependency array to demonstrate re-render toast
 
   function handleThemeToggle() {
-    setLightTheme(!lightTheme);
-    document.documentElement.classList.toggle("dark", lightTheme);
+    set("lightTheme", !gs.lightTheme);
+    document.documentElement.classList.toggle("dark", gs.lightTheme);
   }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
-      <h1 className={clsx("mb-6 text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
+      <h1 className={clsx("mb-6 text-3xl font-bold", gs.lightTheme ? "text-black" : "text-white")}>
         {"Hello, "}
-        {loggedUser || (
+        {gs.loggedUser || (
           <Image
             alt="next logo"
             className="inline p-2 dark:rounded-md dark:bg-white"
@@ -41,8 +40,8 @@ export default function HomePage() {
         className="input input-primary"
         id="nameInput"
         type="text"
-        value={loggedUser || ""}
-        onChange={(e) => setLoggedUser(e.target.value)}
+        value={gs.loggedUser || ""}
+        onChange={(e) => set("loggedUser", e.target.value)}
       />
       <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
         <SunMoon className="mr-2" size={24} />
