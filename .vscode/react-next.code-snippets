@@ -39,4 +39,25 @@
     ],
     "description": "useEffect - get API data on state change"
   },
+  "page - TSX page with search params  ": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "ítsx-page-sp",
+    "body": [
+        "type SearchParams = {",
+        "\tp1?: string; // opcionális mezők, mert a query stringben nem biztos, hogy minden paraméter jelen lesz",
+        "\tp2?: string;",
+        "};",
+        "",
+        "// A Next.js mindig két kulccsal adja át a paraméter objektumokat a page komponensednek:",
+        "// params → a dinamikus útvonal szegmensek: app/teglalap/[id]/page.tsx",
+        "// searchParams → a query stringből kinyert értékek: http://localhost:8080/teglalap?p1=5&p2=8",
+        "",
+        "export default async function PageWithSearchParams({ searchParams }: { searchParams: Promise<SearchParams> }) {",
+        "\tconst sps = await searchParams;",
+        "\tconst p1: number = Number(sps.p1) || 0;",
+        "\treturn <div>Page with search params: {p1}, {sps.p2 || \"undefined\"}</div>;",
+        "}"
+    ],
+    "description": "useEffect - get API data on state change"
+  },
 }
