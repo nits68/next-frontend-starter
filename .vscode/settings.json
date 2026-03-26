@@ -21,9 +21,8 @@
   "git.pruneOnFetch": true,
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "workbench.editor.customLabels.patterns": {
     "**/app/**/page.tsx": "${dirname} - Page",
     "**/app/**/layout.tsx": "${dirname} - Layout",
