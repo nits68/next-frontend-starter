@@ -14,11 +14,14 @@ export default function HomePage() {
 
   useEffect(() => {
     toast.success(`Render on: ${dayjs().format("YYYY.MM.DD HH:mm:ss")}`);
-  }); // no dependency array to demonstrate re-render toast
+  }, [gs.loggedUser, gs.lightTheme]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", !gs.lightTheme);
+  }, [gs.lightTheme]);
 
   function handleThemeToggle() {
     set("lightTheme", !gs.lightTheme);
-    document.documentElement.classList.toggle("dark", gs.lightTheme);
   }
 
   return (
@@ -30,7 +33,7 @@ export default function HomePage() {
             alt="next logo"
             className="inline p-2 dark:rounded-md dark:bg-white"
             height={0}
-            src="next.svg"
+            src="/next.svg"
             width={110}
           />
         )}
@@ -38,7 +41,6 @@ export default function HomePage() {
       </h1>
       <input
         className="input input-primary"
-        id="nameInput"
         type="text"
         value={gs.loggedUser || ""}
         onChange={(e) => set("loggedUser", e.target.value)}
