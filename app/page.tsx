@@ -6,6 +6,7 @@ import { SunMoon } from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+
 import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {

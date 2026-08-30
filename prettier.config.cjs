@@ -5,7 +5,6 @@ module.exports = {
   tabWidth: 2,
   printWidth: 100,
   plugins: [
-    require.resolve("@trivago/prettier-plugin-sort-imports"),
     require.resolve("prettier-plugin-tailwindcss"), // mindig utolsó
   ],
   importOrder: ["<THIRD_PARTY_MODULES>", "^@/(.*)$", "^[./]"],
