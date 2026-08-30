@@ -1,8 +1,11 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 html {
-  data-scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }

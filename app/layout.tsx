@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={"h-full antialiased"} lang="en">
+    <html className={"h-full antialiased"} data-scroll-behavior="smooth" lang="hu">
       <body className="flex min-h-full flex-col">
         <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
         {children}

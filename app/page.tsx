@@ -1,6 +1,5 @@
 "use client";
 
-import { clsx } from "clsx";
 import dayjs from "dayjs";
 import { SunMoon } from "lucide-react";
 import Image from "next/image";
@@ -15,19 +14,20 @@ export default function HomePage() {
 
   useEffect(() => {
     toast.success(`Render on: ${dayjs().format("YYYY.MM.DD HH:mm:ss")}`);
-  }, [gs.loggedUser, gs.lightTheme]);
+  }, [gs.loggedUser, gs.theme]);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", !gs.lightTheme);
-  }, [gs.lightTheme]);
+    const el = document.documentElement;
+    el.dataset.theme = el.dataset.theme === "dark" ? "light" : "dark";
+  }, [gs.theme]);
 
   function handleThemeToggle() {
-    set("lightTheme", !gs.lightTheme);
+    set("theme", gs.theme === "light" ? "dark" : "light");
   }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
-      <h1 className={clsx("mb-6 text-3xl font-bold", gs.lightTheme ? "text-black" : "text-white")}>
+      <h1 className={"mb-6 text-3xl font-bold text-gray-800 dark:text-white"}>
         {"Hello, "}
         {gs.loggedUser || (
           <Image
@@ -41,12 +41,12 @@ export default function HomePage() {
         ! 😎
       </h1>
       <input
-        className="input input-primary"
+        className="input input-primary dark:bg-gray-700 dark:text-white"
         type="text"
         value={gs.loggedUser || ""}
         onChange={(e) => set("loggedUser", e.target.value)}
       />
-      <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
+      <button className="btn mt-4 btn-primary dark:btn-info" onClick={handleThemeToggle}>
         <SunMoon className="mr-2" size={24} />
         Toggle Theme
       </button>

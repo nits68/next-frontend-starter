@@ -27,6 +27,8 @@ Majd interaktív lépések:
 > Would you like your code inside a `src/` directory? **No** / Yes<br>
 > Would you like to use App Router? (recommended) No / **Yes**<br>
 > Would you like to customize the import alias (`@/*` by default)? **No** / Yes<br>
+> Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? No / **Yes**<br>
+
 
 ### 1.2 Konfigurációs állományok létrehozása, vagy másolása a .vscode mappába
 
@@ -54,26 +56,26 @@ Majd interaktív lépések:
 {
   "version": "0.2.0",
   "configurations": [
-     {
+    {
       "name": "Debug client-side in Edge",
       "type": "msedge",
       "request": "launch",
-      "url": "http://localhost:8080",
+      "url": "http://localhost:8080"
     },
     {
       "name": "Debug client-side in Chrome",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:8080",
+      "url": "http://localhost:8080"
     },
     {
-      "name": "Debug server-side",
+      "name": "Next.js: debug server-side",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run dev"
+      "command": "npm run dev -- --inspect"
     },
     {
-      "name": "Debug full stack",
+      "name": "Next.js: debug full stack",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
@@ -107,6 +109,9 @@ Majd interaktív lépések:
     "source.fixAll.eslint": "always"
   },
   "eslint.validate": ["typescript", "react", "typescriptreact", "javascript", "javascriptreact"],
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
+  "prettier.enableDebugLogs": false,
+  "prettier.requireConfig": true,
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
   "git.enableSmartCommit": true,
@@ -114,15 +119,16 @@ Majd interaktív lépések:
   "git.pruneOnFetch": true,
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "workbench.editor.customLabels.patterns": {
-    "**/app/**/page.tsx" : "${dirname} - Page",
-    "**/app/**/layout.tsx" : "${dirname} - Layout",
-    "**/components/**/index.tsx" : "${dirname} - Component",
-  }
+    "**/app/**/page.tsx": "${dirname} - Page",
+    "**/app/**/layout.tsx": "${dirname} - Layout",
+    "**/components/**/index.tsx": "${dirname} - Component"
+  },
+  "workbench.browser.openLocalhostLinks": false
 }
+
 ```
 
 .vscode/tasks.json
@@ -156,7 +162,7 @@ Majd interaktív lépések:
 ### 1.3 Prettier és ESLint kiegészítők telepítése, beállítása, elemek (osztályok, property-k, importok) sorba rendezése
 
 ```
-npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plugin-react @trivago/prettier-plugin-sort-imports
+npm i -D prettier prettier-plugin-tailwindcss eslint-config-prettier eslint-plugin-react eslint-plugin-simple-import-sort
 ```
 
 **prettier.config.cjs** állomány létrehozása(másolása) a projekt főkönyvtárába
@@ -169,12 +175,8 @@ module.exports = {
   tabWidth: 2,
   printWidth: 100,
   plugins: [
-    require.resolve("@trivago/prettier-plugin-sort-imports"),
     require.resolve("prettier-plugin-tailwindcss"), // mindig utolsó
   ],
-  importOrder: ["<THIRD_PARTY_MODULES>", "^@/(.*)$", "^[./]"],
-  importOrderSeparation: false,
-  importOrderSortSpecifiers: true,
   tailwindFunctions: ["clsx"],
   tailwindStylesheet: "./app/globals.css",
 };
@@ -196,17 +198,23 @@ Prettier scriptek hozzáadása a **package.json**-ba:
 eslint.config.mjs
 
 ```
+import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import prettier from "eslint-config-prettier/flat";
-import { defineConfig, globalIgnores } from "eslint/config";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettier,
   {
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
     rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
       "react/jsx-sort-props": [
         1,
         {
@@ -272,21 +280,23 @@ npm i -D daisyui@latest
 
 ```
 @import "tailwindcss";
-@plugin "daisyui";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-html {
-  data-scroll-behavior: smooth;
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
 }
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+html {
+  scroll-behavior: smooth;
+}
 ```
 
 [daisyUI dokumentáció](https://daisyui.com/docs/intro/)
 
-## 3. Axios telepítése (opcionális, fetch API használható helyette)
+## 3. Axios telepítése (opcionális, fetch API is használható helyette)
 
-Backend API hívásokhoz, egyszerűbben használható, mint a beépített fetch()
+Backend API hívásokhoz, egyszerűbben használható, mint a beépített fetch(), viszont néha vannak korlátai
 
 ```
 npm install axios
@@ -301,9 +311,10 @@ npm install react-hot-toast
 ```
 layout.tsx bővítése a Toaster elemmel:
 ```
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "next-frontend-starter",
@@ -316,47 +327,53 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html className={"h-full antialiased"} data-scroll-behavior="smooth" lang="hu">
+      <body className="flex min-h-full flex-col">
         <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
         {children}
       </body>
     </html>
   );
 }
+
 ```
 
 ## 5. Zustand global state management telepítése
 ```
 npm install zustand
 ```
-
-A main layout.tsx bővítése és egyszerűsítése:
-
+store/globalStore.ts állományban minta global store létrehozása:
 ```
-import type { Metadata } from "next";
-import { Toaster } from "react-hot-toast";
-import "./globals.css";
+import { create } from "zustand";
 
-export const metadata: Metadata = {
-  title: "next-frontend-starter",
-  description: "Generated by create next app",
+// Define the shape of the global state
+type GlobalStateData = {
+  loggedUser: string | null;
+  theme: "light" | "dark";
+  id: number | null;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body>
-        <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
-        {children}
-      </body>
-    </html>
-  );
-}
+type GlobalStore = {
+  gs: GlobalStateData;
+  set: <K extends keyof GlobalStateData>(key: K, value: GlobalStateData[K]) => void;
+};
+
+export const useGlobalStore = create<GlobalStore>()((set) => ({
+  // Initialize the global state:
+  gs: {
+    loggedUser: null,
+    theme: "light",
+    id: null,
+  },
+
+  set: (key, value) =>
+    set((state) => ({
+      gs: {
+        ...state.gs,
+        [key]: value,
+      },
+    })),
+}));
 
 ```
 
@@ -368,52 +385,59 @@ Dátumok és időpontok kezeléséhez https://day.js.org/
 npm install dayjs
 ```
 
-## 7. clsx - A tiny (239B) utility for constructing className strings conditionally.
 
-Hompage: https://github.com/lukeed/clsx#readme
-
-```
-npm i clsx
-```
-
-## 8. A page.tsx átírása, új lehetőségek bemutatása
+## 7. A page.tsx átírása, új lehetőségek (Zustand, Day.js) bemutatása
 
 ```
 "use client";
 
-import { clsx } from "clsx";
 import dayjs from "dayjs";
 import { SunMoon } from "lucide-react";
+import Image from "next/image";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+
 import { useGlobalStore } from "@/store/globalStore";
 
 export default function HomePage() {
   // Using Zustand global store for state management example
-  const { loggedUser, setLoggedUser } = useGlobalStore();
-  const { lightTheme, setLightTheme } = useGlobalStore();
+  const { gs, set } = useGlobalStore();
 
   useEffect(() => {
     toast.success(`Render on: ${dayjs().format("YYYY.MM.DD HH:mm:ss")}`);
-  }); // no dependency array to demonstrate re-render toast
+  }, [gs.loggedUser, gs.theme]);
+
+  useEffect(() => {
+    const el = document.documentElement;
+    el.dataset.theme = el.dataset.theme === "dark" ? "light" : "dark";
+  }, [gs.theme]);
 
   function handleThemeToggle() {
-    setLightTheme(!lightTheme);
-    document.documentElement.classList.toggle("dark", lightTheme);
+    set("theme", gs.theme === "light" ? "dark" : "light");
   }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
-      <h1 className={clsx("mb-6 text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
-        Hello, {loggedUser || ""}! 😎
+      <h1 className={"mb-6 text-3xl font-bold text-gray-800 dark:text-white"}>
+        {"Hello, "}
+        {gs.loggedUser || (
+          <Image
+            alt="next logo"
+            className="inline p-2 dark:rounded-md dark:bg-white"
+            height={0}
+            src="/next.svg"
+            width={110}
+          />
+        )}
+        ! 😎
       </h1>
       <input
-        className="input input-primary"
+        className="input input-primary dark:bg-gray-700 dark:text-white"
         type="text"
-        value={loggedUser || ""}
-        onChange={(e) => setLoggedUser(e.target.value)}
+        value={gs.loggedUser || ""}
+        onChange={(e) => set("loggedUser", e.target.value)}
       />
-      <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
+      <button className="btn mt-4 btn-primary dark:btn-info" onClick={handleThemeToggle}>
         <SunMoon className="mr-2" size={24} />
         Toggle Theme
       </button>
@@ -422,13 +446,13 @@ export default function HomePage() {
 }
 ```
 
-## 9. Install React Developer Tools
+## 8. Install React Developer Tools
 
 [MS Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil?refid=bingshortanswersdownload)
 
 [Google Chrome](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 
-## 10. Linkek, dokumentációk (white list)
+## 9. Linkek, dokumentációk (white list)
 
 - [React.js](https://react.dev/reference/react)
 - [Next.js](https://nextjs.org/docs)
@@ -445,7 +469,7 @@ export default function HomePage() {
 - [GetEmoji](https://getemoji.com/)
 - [clsx](https://github.com/lukeed/clsx#readme)
 
-## 11. Tailwind CSS osztályok funkcionális sorrendje
+## 10. Tailwind CSS osztályok funkcionális sorrendje
 
 A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 

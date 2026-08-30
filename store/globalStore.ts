@@ -3,7 +3,7 @@ import { create } from "zustand";
 // Define the shape of the global state
 type GlobalStateData = {
   loggedUser: string | null;
-  lightTheme: boolean;
+  theme: "light" | "dark";
   id: number | null;
 };
 
@@ -16,7 +16,7 @@ export const useGlobalStore = create<GlobalStore>()((set) => ({
   // Initialize the global state:
   gs: {
     loggedUser: null,
-    lightTheme: true,
+    theme: "light",
     id: null,
   },
 
