@@ -4,7 +4,7 @@ import { create } from "zustand";
 type GlobalStateData = {
   loggedUser: string | null;
   theme: "light" | "dark";
-  id: number | null;
+  id: number | null; // Example additional property, can be extended as needed
 };
 
 type GlobalStore = {

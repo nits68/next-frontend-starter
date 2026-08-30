@@ -17,8 +17,7 @@ export default function HomePage() {
   }, [gs.loggedUser, gs.theme]);
 
   useEffect(() => {
-    const el = document.documentElement;
-    el.dataset.theme = el.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = gs.theme;
   }, [gs.theme]);
 
   function handleThemeToggle() {
@@ -33,7 +32,7 @@ export default function HomePage() {
           <Image
             alt="next logo"
             className="inline p-2 dark:rounded-md dark:bg-white"
-            height={0}
+            height={22}
             src="/next.svg"
             width={110}
           />
