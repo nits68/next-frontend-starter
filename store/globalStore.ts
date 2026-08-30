@@ -1,3 +1,6 @@
+// Example store using Zustand for global state management in a Next.js application
+// Only use in small applications or exams
+
 import { create } from "zustand";
 
 // Define the shape of the global state
