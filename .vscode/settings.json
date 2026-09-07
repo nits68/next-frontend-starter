@@ -24,9 +24,9 @@
   "js/ts.preferences.importModuleSpecifier": "non-relative",
   "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "workbench.editor.customLabels.patterns": {
-    "**/app/**/page.tsx": "${dirname} - Page",
-    "**/app/**/layout.tsx": "${dirname} - Layout",
-    "**/components/**/index.tsx": "${dirname} - Component"
+    "**/app/**/page.tsx": "${dirname}\\Page",
+    "**/app/**/layout.tsx": "${dirname}\\Layout",
+    "**/components/**/index.tsx": "${dirname}\\Component"
   },
   "workbench.browser.openLocalhostLinks": false
 }
