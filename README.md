@@ -29,7 +29,6 @@ Majd interaktív lépések:
 > Would you like to customize the import alias (`@/*` by default)? **No** / Yes<br>
 > Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? No / **Yes**<br>
 
-
 ### 1.2 Konfigurációs állományok létrehozása, vagy másolása a .vscode mappába
 
 .vscode/extensions.json (majd a felajánlott VS Code bővítmények telepítése)
@@ -309,7 +308,9 @@ Felugró toast üzenetekhez https://react-hot-toast.com/docs
 ```
 npm install react-hot-toast
 ```
+
 layout.tsx bővítése a Toaster elemmel:
+
 ```
 import "./globals.css";
 
@@ -339,10 +340,13 @@ export default function RootLayout({
 ```
 
 ## 5. Zustand global state management telepítése
+
 ```
 npm install zustand
 ```
+
 store/globalStore.ts állományban minta global store létrehozása:
+
 ```
 import { create } from "zustand";
 
@@ -384,7 +388,6 @@ Dátumok és időpontok kezeléséhez https://day.js.org/
 ```
 npm install dayjs
 ```
-
 
 ## 7. A page.tsx átírása, új lehetőségek (Zustand, Day.js) bemutatása
 

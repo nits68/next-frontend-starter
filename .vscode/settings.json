@@ -10,6 +10,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
+  "files.eol": "\n",
   "eslint.validate": ["typescript", "react", "typescriptreact", "javascript", "javascriptreact"],
   "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
   "prettier.enableDebugLogs": false,

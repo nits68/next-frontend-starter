@@ -29,6 +29,5 @@ This is a minimal Next.js App Router starter, not a full application — current
 
 ## Code style (enforced by lint/format, not just convention)
 
-
 - ESLint (`eslint.config.mjs`) extends `eslint-config-next` (core-web-vitals + typescript) plus `eslint-config-prettier`, and adds `react/jsx-sort-props` (alphabetical, shorthand props not forced first/last, callbacks last). Let editor format-on-save/lint-fix handle this rather than hand-ordering props/imports.
 - Tailwind classes are conventionally grouped by function (layout → box model → positioning → flex/grid → sizing/spacing → typography → backgrounds → borders → effects → filters → transitions → transforms → interactivity → accessibility → tables → state variants → responsive variants), matching `prettier-plugin-tailwindcss`'s own sort order — don't fight this by hand-ordering differently.
