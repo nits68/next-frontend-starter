@@ -45,6 +45,7 @@ Majd interaktív lépések:
     "abdulowhab.json-to-ts-type",
     "tomoki1207.pdf",
     "humao.rest-client",
+    "yoavbls.pretty-ts-errors"
   ]
 }
 ```
@@ -107,6 +108,7 @@ Majd interaktív lépések:
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
+  "files.eol": "\n",
   "eslint.validate": ["typescript", "react", "typescriptreact", "javascript", "javascriptreact"],
   "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
   "prettier.enableDebugLogs": false,
@@ -121,13 +123,12 @@ Majd interaktív lépések:
   "js/ts.preferences.importModuleSpecifier": "non-relative",
   "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "workbench.editor.customLabels.patterns": {
-    "**/app/**/page.tsx": "${dirname} - Page",
-    "**/app/**/layout.tsx": "${dirname} - Layout",
-    "**/components/**/index.tsx": "${dirname} - Component"
+    "**/app/**/page.tsx": "${dirname}\\Page",
+    "**/app/**/layout.tsx": "${dirname}\\Layout",
+    "**/components/**/index.tsx": "${dirname}\\Component"
   },
   "workbench.browser.openLocalhostLinks": false
 }
-
 ```
 
 .vscode/tasks.json
@@ -173,20 +174,23 @@ module.exports = {
   trailingComma: "all",
   tabWidth: 2,
   printWidth: 100,
+  endOfLine: "lf",
   plugins: [
     require.resolve("prettier-plugin-tailwindcss"), // mindig utolsó
   ],
   tailwindFunctions: ["clsx"],
   tailwindStylesheet: "./app/globals.css",
 };
+
 ```
 
-Prettier scriptek hozzáadása a **package.json**-ba:
+ESLint és Prettier scriptek hozzáadása a **package.json**-ba:
 
 ```
 ...
 "scripts": {
   ...
+  "lint:fix": "eslint --fix",
   "format": "prettier --check --ignore-path .gitignore .",
   "format:fix": "prettier --write --ignore-path .gitignore ."
 }
@@ -201,6 +205,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import prettier from "eslint-config-prettier/flat";
+import reactPlugin from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 const eslintConfig = defineConfig([
@@ -209,6 +214,7 @@ const eslintConfig = defineConfig([
   prettier,
   {
     plugins: {
+      react: reactPlugin,
       "simple-import-sort": simpleImportSort,
     },
     rules: {
@@ -264,7 +270,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
 ```
 
 ## 2. daisyUI telepítése
@@ -281,7 +286,9 @@ npm i -D daisyui@latest
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+  themes:
+    light --default,
+    dark --prefersdark;
 }
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
@@ -289,6 +296,7 @@ npm i -D daisyui@latest
 html {
   scroll-behavior: smooth;
 }
+
 ```
 
 [daisyUI dokumentáció](https://daisyui.com/docs/intro/)
@@ -336,16 +344,9 @@ export default function RootLayout({
     </html>
   );
 }
-
 ```
 
 ## 5. Zustand global state management telepítése
-
-```
-npm install zustand
-```
-
-store/globalStore.ts állományban minta global store létrehozása:
 
 ```
 import { create } from "zustand";
@@ -411,8 +412,7 @@ export default function HomePage() {
   }, [gs.loggedUser, gs.theme]);
 
   useEffect(() => {
-    const el = document.documentElement;
-    el.dataset.theme = el.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = gs.theme;
   }, [gs.theme]);
 
   function handleThemeToggle() {
@@ -427,7 +427,7 @@ export default function HomePage() {
           <Image
             alt="next logo"
             className="inline p-2 dark:rounded-md dark:bg-white"
-            height={0}
+            height={22}
             src="/next.svg"
             width={110}
           />
@@ -566,8 +566,7 @@ sr-only, not-sr-only, ...
 table-auto, table-fixed, border-collapse, border-separate, ...
 ```
 
-16. Transitions (state variants)
-    Állapot prefixek külön kezelve, pl.:
+16. Transitions (state variants), állapot prefixek külön kezelve, pl.:
 
 ```
 hover:, focus:, active:, disabled:, group-hover:, peer-focus:, ...
