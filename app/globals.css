@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
+/* A "dark" téma csak kézi kapcsolásra (data-theme="dark") lép életbe.
+   A --prefersdark jelölő szándékosan hiányzik: enélkül a böngésző sötét
+   módja nem írja felül az oldal színeit. */
 @plugin "daisyui" {
   themes:
     light --default,
-    dark --prefersdark;
+    dark;
 }
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
