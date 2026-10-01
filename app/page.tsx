@@ -20,9 +20,9 @@ export default function HomePage() {
     document.documentElement.dataset.theme = gs.theme;
   }, [gs.theme]);
 
-  function handleThemeToggle() {
+  const handleThemeToggle = () => {
     set("theme", gs.theme === "light" ? "dark" : "light");
-  }
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
