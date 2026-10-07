@@ -39,7 +39,6 @@
     "typescript": "^5"
   },
   "allowScripts": {
-    "unrs-resolver@1.12.2": true,
-    "sharp@0.35.5": true
+    "unrs-resolver": true
   }
 }
