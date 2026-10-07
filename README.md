@@ -26,8 +26,10 @@ Majd interaktív lépések:
 > Would you like to use Tailwind CSS? No / **Yes**<br>
 > Would you like your code inside a `src/` directory? **No** / Yes<br>
 > Would you like to use App Router? (recommended) No / **Yes**<br>
+> Would you like to use Cache Components? No / **Yes**<br>
 > Would you like to customize the import alias (`@/*` by default)? **No** / Yes<br>
 > Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? No / **Yes**<br>
+> Would you like to help improve Next.js by letting agents prepare anonymized feedback for your review as you code? (Disable anytime with `experimental.agentFeedback: false`.) **No** / Yes<br>
 
 ### 1.2 Konfigurációs állományok létrehozása, vagy másolása a .vscode mappába
 
