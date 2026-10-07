@@ -37,7 +37,6 @@ Majd interaktív lépések:
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "csstools.postcss",
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",

@@ -8,11 +8,7 @@ export const metadata: Metadata = {
   description: "Next.js + Tailwind + daisyUI alapsablon a tananyag projektjeihez",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html className={"h-full antialiased"} data-scroll-behavior="smooth" lang="hu">
       <body className="flex min-h-full flex-col">
