@@ -10,6 +10,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
+  "markdown.preview.scrollPreviewWithEditor": false,
+  "markdown.preview.scrollEditorWithPreview": false,
   "files.eol": "\n",
   "eslint.validate": ["typescript", "react", "typescriptreact", "javascript", "javascriptreact"],
   "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
