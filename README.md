@@ -475,7 +475,7 @@ export default function HomePage() {
 
 ## 10. Tailwind CSS osztályok funkcionális sorrendje
 
-A plugin az 1–17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
+A plugin az 1-17 kategória (funkcionális logika) szerint rendez, nem ABC-sorrendben, hanem a Tailwind buildlogika alapján.
 
 1. Layout: Ezek határozzák meg az elem megjelenésének alapját:
 
